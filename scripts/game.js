@@ -1,10 +1,12 @@
+const prompt = require("prompt-sync")();
+
 //1. criar os players e seus atributos (player x casas (console))
 class Wizard {
-constructor(name, strength) {
-this.name = name
-this.health = 50
-this.strength = strength //8
-}
+   constructor(name, strength) {
+      this.name = name
+      this.health = 50
+      this.strength = strength //8
+   }
 }
 
 let player = new Wizard ('playerName', 8)
@@ -13,129 +15,140 @@ let slytherin = new Wizard ('Slytherin', 12)
 let ravenclaw = new Wizard ('Ravenclaw', 8)
 let hufflepuf = new Wizard ('Hufflepuf', 8)
 
-let houses = [gryffindor,slytherin, ravenclaw, hufflepuf]
-let indexHouse = ''
+let houses = [gryffindor, slytherin, ravenclaw, hufflepuf]
+
+//let indexHouse = ''
 //let chosenHouses = []
 //let choices = ['light', 'snake', 'mind']
-let gameOver = false
-let playerChoice = ''
-let currentHouse = ''
-let  gameWinne = ''
+//let gameOver = false
+let playerSpell = ''
+//let currentHouse = ''
+let  gameWinner = 'player'
+let playerScore = ''
+let houseScore = ''
+let rounds = 0
 //let duelStart = document.getElementsByClassName('duelStart')
 
-//iniciar o jogo
 
-function chooseHouse(){
-   let indexHouse = Math.floor(Math.random()*houses.length)
-   currentHouse = houses[indexHouse]
-   console.log(currentHouse)
-   }
 
+//trazer o adversário
+// function chooseHouse(){
+//    let indexHouse = Math.floor(Math.random()*houses.length)
+//    currentHouse = houses[indexHouse]
+//    console.log(currentHouse)
+//}
+
+//jogador ataca 
+function playerAttack(playerSpell, opponentHouse){
    
-function playerAttack(){
-   playerChoice = 'mind' 
    
-   if (playerChoice ===  'light' && currentHouse.name === 'Slytherin') {
+   if (playerSpell ===  'light' && opponentHouse.name === 'Slytherin') {
       slytherin.health -= player.strength *2 //('sonserina fraca')
       
    }
-  else if (playerChoice ===  'snake' && currentHouse.name === 'Slytherin') {
+  else if (playerSpell ===  'snake' && opponentHouse.name === 'Slytherin') {
    slytherin.health -= player.strength /2 //('sonserina forte')
    
    }
-  else if (playerChoice ===  'light' && currentHouse.name === 'Hufflepuf') {
+  else if (playerSpell ===  'light' && opponentHouse.name === 'Hufflepuf') {
    hufflepuf.health -= player.strength /2 //('lufa lufa forte')
    
   }
-  else if (playerChoice ===  'mind' && currentHouse.name === 'Hufflepuf') {
+  else if (playerSpell ===  'mind' && opponentHouse.name === 'Hufflepuf') {
    hufflepuf.health -= player.strength *2 //('lufa lufa fraca')
    
   }
-  else if (playerChoice ===  'snake' && currentHouse.name === 'Gryffindor') {
+  else if (playerSpell ===  'snake' && opponentHouse.name === 'Gryffindor') {
    gryffindor.health -= player.strength *2 //('grifinória fraca')
    
   }
-  else if (playerChoice ===  'tricksy' && currentHouse.name === 'Gryffindor') {
+  else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Gryffindor') {
    gryffindor.health -= player.strength /2 //('grifinória forte')
    
   }
-  else if (playerChoice ===  'mind' && currentHouse.name === 'Ravenclaw') {
+  else if (playerSpell ===  'mind' && opponentHouse.name === 'Ravenclaw') {
    ravenclaw.health -= player.strength /2 //('corvinal forte')
    
   }
-  else if (playerChoice ===  'tricksy' && currentHouse.name === 'Ravenclaw') {
+  else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Ravenclaw') {
    ravenclaw.health -= player.strength /2 //('corvinal fraca')
    
   }
   else 
-  currentHouse.health -= player.strength
+  opponentHouse.health -= player.strength
 }
 
-function houseAttack(){
-   player.health -= currentHouse.strength
+function opponentAttack(opponentHouse){
+   player.health -= opponentHouse.strength
 }
 
-//playerAttack()
+function playGame(){
+   
+   for (let i=0; i < houses.length && gameWinner == 'player'; i++){
 
+      let currentHouse = i
+      let opponentHouse = houses[currentHouse]
+      console.log(opponentHouse.name)
 
-function startGame(){
-   chooseHouse()
-   //duelStart.innerHTML = 'Choose your spell!'
-   playerAttack()
-   houseAttack()
-   checkGameOver()
-     
+      do {
+         const spell = prompt("Type your spell: ");
+         playerAttack(spell, opponentHouse)
+         opponentAttack(opponentHouse)
+      } while (!isGameOver(opponentHouse))
+   
+   }
+   
+   
 }
 
-function playAgain(){
-playerAttack()
-houseAttack ()
-checkGameOver ()
-}
-
+//restaurar a vida do jogador
 function restorePlayerHealth() {
    player.health = 50
    //playerHealth.innerHTML = player.health
 }
 
-function changeHouse(){
-   houses.splice(indexHouse,1)
-   chooseHouse()
-}
+//alterar adversário (VALIDAR)
+// function changeHouse(){
+//    if(indexHouse = houses.length) checkGameOver()
+//   else {
+//    indexHouse = [indexHouse+1]
+//   currentHouse = houses[indexHouse]
+//   restorePlayerHealth()
+//   }
+// }
 
-startGame()
-
-function checkGameOver() {
-   if (currentHouse.health <=0) {
-      changeHouse ()
-      restorePlayerHealth()
-}
-   if(!houses) {
+//validar gameover
+function isGameOver(opponentHouse) {
+   let gameOver = false;
+   if (player.health <=0) {
       gameOver = true
-      gameWinner = 'player'
-   console.log(currentHouse.health)
-   console.log('player ganhou')
+      gameWinner = 'cpu'
+      console.log(player.health)
+      console.log('cpu ganhou')
+   }
+
+   else if(opponentHouse.health <= 0) {
+      restorePlayerHealth()
+      gameOver = true
+      console.log(opponentHouse.health)
+      console.log(opponentHouse)
+      console.log('player ganhou')
+   }
+
+   return gameOver;
 }
-   else if (player.health <=0) {
-   gameOver = true
-   gameWinner = 'cpu'
-   console.log(player.health)
-   console.log('cpu ganhou')
-   console.log(houses)
-}
-   else playAgain()
-}
+
+playGame()
 
 
 
-//function houseAttack(){
-  //return  player.health -= currentHouse.strength
-//}
 
-// function play (playerChoice){
+
+
+// function play (playerSpell){
 //    chooseHouse()
 // //if (!gameOver) {
-// if(playerChoice === 'light' && currentHouse.name === 'Slytherin'){
+// if(playerSpell === 'light' && currentHouse.name === 'Slytherin'){
 //    slytherin.health -= (player.strength*2)
 //    console.log(slytherin.health)
 // } else {
@@ -156,9 +169,9 @@ function checkGameOver() {
 // }
 
 
-// function play(playerChoice){
+// function play(playerSpell){
 //    if(!this.gameOver) {
-//        this.playerChoice = playerChoice
+//        this.playerSpell = playerSpell
 //        this.cpuChoice = this.getCpuChoice()
 //        this.checkRoundWinner()
 //        this.roundsPlayed++
@@ -192,8 +205,8 @@ function checkGameOver() {
 
 //2. Player ataca (escolhe feitiço desejado)
 //function chooseSpell(){
-   //let playerChoice = 'Expecto Patronum'//incluir botão com as opções de clique
-   //return playerChoice
+   //let playerSpell = 'Expecto Patronum'//incluir botão com as opções de clique
+   //return playerSpell
 //}
 
 
@@ -201,10 +214,10 @@ function checkGameOver() {
 
 //2.1. se o feitiço for forte contra casa = dano = ataquePlayer *2
 
-// function start(playerChoice){
+// function start(playerSpell){
 //    chooseHouse()
 //    chooseSpell()
-//    if (playerChoice === spells.ligth){
+//    if (playerSpell === spells.ligth){
 //       console.log(deu certo)
 //    }
 // }
