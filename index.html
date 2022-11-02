@@ -9,25 +9,45 @@
     <link rel="shortcut icon" href="./images/duel-icon.JPG" type="image/x-icon">
     <title>Wizard Duel</title>
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    
 
 </head>
 
 <body>
     <div class="background">
         <div class="container">
+            <div class="playerBox">
+                <div class="playerInfo">
+                    <img src="./images/player-img.png">
+                    <label for="playerName">Name: </label>
+                    <!-- <input id="playerName" type="text" name="name" /> -->
+                    <h1 id="playerName">TESTE</h1>
+                    <ul>
+                        <li>
+                            <h2>HP <span id="playerCurrentHealth"></span> | <span id="playerMaxHealth"></span></h2>
+                        </li>
+                        <li>
+                            <h2>STR <span id="playerStrength"> </span></h2>
+                        </li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+
             <div class="houseBox">
                 <div class="houseInfo">
                     <img id="houseImg">
                     <h1 id="houseName"></h1>
                     <ul>
                         <li>
-                            <h2>Health <span id="houseCurrentHealth"></span> / <span id="houseMaxHealth"></span></h2>
+                            <h2>Health <span id="houseCurrentHealth"></span> | <span id="houseMaxHealth"></span></h2>
                         </li>
                         <li>
                             <h2>Strength <span id="houseStrength"></span></h2>
@@ -36,64 +56,42 @@
                     </ul>
                 </div>
             </div>
-
-            
-            <!-- <div class="scoreboardContainer">
-                <h1>Score: <span id="scoreboard">0</span></h1>
-            </div> -->
-            <div class="playerBox">
-                <div class="playerInfo">
-                    <img src="./media/Player/Faceset.png">
-                    <label for="playerName">Name:</label>
-                    <input id="playerName" type="text" name="name" />
-                    <h1 id="playerName"></h1>
-                    <ul>
-                        <li>
-                            <h2>Health <span id="playerCurrentHealth"></span> / <span id="playerMaxHealth"></span></h2>
-                        </li>
-                        <li>
-                            <h2>Strength <span id="playerStrength"></span></h2>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-            </div>
             
             <div class="duelStart">
                 <h2 id="duelStartId">Press PLAY</h2>
             </div>  
 
             <div class="playerSpells">
-                <button id="btnLight" class="spellsBtn displayNone">Expecto Patronum</button>
+                <button id= "btnLight" class="spellsBtn displayNone">Expecto Patronum</button>
                 <button id="btnSnake" class="spellsBtn displayNone">SerpenSortia</button>
-                <button id="btnMind" class="spellsBtn displayNone">Confundus</button>
-                <button id="btnTricksy" class="spellsBtn displayNone">Riddikulus</button>
-                <button id="gameStart" class="btnPlay">PLAY</button>
-                <button id="gameReset" class="btnReset">RESET</button>
+                <button id= "btnMind" class="spellsBtn displayNone">Confundus</button>
+                <button id= "btnTricksy" class="spellsBtn displayNone">Riddikulus</button>
+                <button id= "gameStart" class="btnPlay">PLAY</button>
+                <button id= "gameReset" class="btnReset">RESET</button>
             </div>
 
             <div>
                 <ul class="footer">
-                    <li><button id="hpMusic" class="hpMusic">Music ON</button></li>
+                    <li><button id= "btnMusic"> Music ON </button></li>
                     <li><button onclick="" class="credits"><a href="creditos.html" target="_blank">credits</a></button>
-                    </li>0
-                    <li><a href="https://www.linkedin.com/in/asanxdev/" target="_blank"><img
-                                src="./media/img/linkedinIcon.png" alt="linkin link"></a></li>
+                    <!-- </li>0 -->
+                    <!-- <li><a href="https://www.linkedin.com/in/asanxdev/" target="_blank"><img
+                                src="./media/img/linkedinIcon.png" alt="linkin link"></a></li> -->
 
                 </ul>
             </div>
         </div>
     </div>
 
-    <audio id="winAudio" src="./sounds/Success3.wav"></audio>
-    <audio id="playerAttackAudio" src="./sounds/leafShuriken.wav"></audio>
-    <audio id="enemyAttackAudio" src="./sounds/fireShuriken.wav"></audio>
+    <!-- <audio id="winAudio" src="./sounds/Success3.wav"></audio> -->
+    <!-- <audio id="playerAttackAudio" src="./sounds/leafShuriken.wav"></audio>
+    <audio id="enemyAttackAudio" src="./sounds/fireShuriken.wav"></audio> -->
     <audio id="gameOverAudio" src="./audio/harry-potter-fail.mp3"></audio>
-    <audio id="scoreAudio" src="./sounds/coin.wav"></audio>
-    <audio id="hpAudio" class="bhpAudioActive" loop="true" src="./audio/harry-potter-theme.mp3" preload="auto"></audio>
-    <script src= "./scripts/game.js"></script>
-    <script src=“.scripts/index.js”></script>
+    <!-- <audio id="scoreAudio" src="./sounds/coin.wav"></audio> -->
+    <audio id="hpAudio" class="hpAudioActive" loop="true" src="./audio/harry-potter-theme.mp3" preload="auto" type="audio/mpeg"></audio>
+    <script src="./scripts/game.js"></script>
+    <!-- <script src=“./scripts/index.js”></script> -->
+
 </body>
 </html>
 

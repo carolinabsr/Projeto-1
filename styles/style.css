@@ -1,6 +1,7 @@
 * {
     margin: 0;
-    font-family: 'MedievalSharp', cursive;
+    /* font-family: 'MedievalSharp', cursive; */
+    font-family: 'Yusei Magic', sans-serif;
 }
 
 body {
@@ -9,16 +10,24 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
 
 .container {
     
-    margin: 10px auto 10px auto;
-    width: 90%;
-    /* border: 4px solid #EEEDDE; */
+    /* margin: 10px auto 10px auto; */
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 4px solid #EEEDDE;
     color: #EEEDDE;
+    margin-top: 50px;
     
 }
 
@@ -28,8 +37,8 @@ body {
     border: 3px solid #EEEDDE;
     width: 20%;
     height: 850px;
-    margin-top: 2%;
-    margin-left: 46%;
+    margin-top: 3%;
+    margin-right: 2%;
     
 }
 
@@ -39,15 +48,16 @@ body {
 
 .houseInfo {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: row wrap;
 }
 
 .houseInfo img {
-    margin: 16px;
+    margin: 5px;
+    margin-left: 10px;
     min-width: 100px;
     width: 160px;
-    border: 3px solid #EEEDDE;
+    /* border: 3px solid #EEEDDE; */
 
 }
 
@@ -73,39 +83,63 @@ body {
     border: 3px solid #EEEDDE;
     width: 20%;
     height: 850px;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 2%;
+    /* display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: column; */
 }
 
 .playerBox ul {
-    width: 350px;
+    /* width: 350px; */
+    display:flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    list-style: none;
 }
 
 .playerInfo {
-    /* display: flex;
-    align-items: flex-start; */
+    
     align-items: center;
     justify-content: flex-start;
+    flex-flow: wrap;
 }
 
 .playerInfo img {
-    margin: 16px;
+
+    max-width:300px;
+    max-height:250px;
+    width: auto;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    /* margin: 10px; */
+   
+    /* margin: 16px;
     min-width: 100px;
-    width: 160px;
-    border: 3px solid #EEEDDE;
+    width: 160px; */
+    /*   */
 }
 
 .playerInfo li {
     font-size: 1vmax;
-    display: inline-block;
-    list-style: none;
-    padding: 5px;
-    margin: 10px;
+    
+    
+    /* display: inline-block;
+    list-style: none; */
+    /* padding: 5px;
+    margin: 10px; */
 }
 
 .playerInfo h1 {
     
     font-size: 2.5vmax;
+}
+
+.playerInfo h1:hover {
+    
+    color: #b8cff7;
 }
 
 /* .scoreboardContainer {
@@ -122,8 +156,10 @@ body {
     align-items: center;
     /* border: 4px solid #EEEDDE; */
     margin: 10px auto;
+    padding-top: 15px;
+    margin-top: 100px;
     width: 95.5%;
-    height: 160px;
+    height: 110px;
     /* display: flex;
     justify-content: center;
     align-items: center;
@@ -140,46 +176,67 @@ body {
 
 .playerSpells {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    border: 4px solid #EEEDDE;
+    /* border: 4px solid #EEEDDE; */
     margin: 10px auto;
     width: 95.5%;
     height: 160px;
+    
 }
 
 .spellsBtn {
     font-size: 1.2vmax;
     margin: 4px;
-    border: 4px dashed #EEEDDE;
-    background-color: #141E27;
+    border: 2px dashed #EEEDDE;
+    background-color: #1b1e3f;
     color: #EEEDDE;
-    width: 20%;
-    height: 60%;
+    border: #6e5ec4 dotted 2px;
+    width: 15%;
+    height: 30%;
     text-decoration: none;
+    border-radius: 10px;
+}
+
+.spellsBtn:hover{
+    cursor: pointer;
+    background-color: #2865af;
 }
 
 .btnPlay {
     font-size: 1.8em;
     margin: 4px;
-    border: 4px dashed #EEEDDE;
-    background-color: #141E27;
+    border: 2px solid #EEEDDE;
+    background-color: #2865af;
     color: #EEEDDE;
-    width: 20%;
-    height: 60%;
-    text-decoration: none;
+    width: 15%;
+    height: 50%;
+    /* text-decoration : none; */
+    border-radius: 12px;
+    opacity: 2;
 
+}
+
+.btnPlay:hover{
+    cursor: pointer;
+    background-color: #56507b;
+}
+
+.btnReset:hover{
+    cursor: pointer;
+    background-color: #56507b;
 }
 
 .btnReset {
     font-size: 1.8em;
     margin: 4px;
-    border: 4px dashed #EEEDDE;
-    background-color: #141E27;
+    border: 2px solid #EEEDDE;
+    background-color: #2865af;
     color: #EEEDDE;
-    width: 20%;
-    height: 60%;
-    text-decoration: none;
+    width: 15%;
+    height: 50%;
+    /* text-decoration: none; */
+    border-radius: 12px;
 }
 
 .displayNone {
@@ -189,7 +246,7 @@ body {
 .footer {
     display: flex;
     width: 300px;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -208,12 +265,18 @@ body {
     font-size: 16px;
     text-decoration: none;
     margin: 10px;
-    background-color: #141E27;
+    background-color: transparent;
     color: #EEEDDE;
-    border: #EEEDDE solid 4px;
+    border: #6e5ec4 dotted 2px;
     width:90px;
     height: 50px;
     
+    
+}
+
+.footer button:hover{
+    cursor: pointer;
+    background-color: #1e2245;
 }
 
 .footer a {
@@ -222,7 +285,7 @@ body {
     color: #EEEDDE;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
 
     body{
         background-image: none;
@@ -252,9 +315,9 @@ body {
         margin: 2px;
     }
 
-    .scoreboardContainer {
+    /* .scoreboardContainer {
         top: 195px;
-    } 
+    }  */
 
      .duelStart {
         width: 92%;
