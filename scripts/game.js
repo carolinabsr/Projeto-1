@@ -1,4 +1,83 @@
-const prompt = require("prompt-sync")();
+// const prompt = require("prompt-sync")();
+
+//selecionar os botões:
+const btnLight = document.getElementById('btnLight')
+const btnSnake = document.getElementById('btnSnake')
+const btnMind = document.getElementById('btnMind')
+const btnTricksy = document.getElementById('btnTricksy')
+const btnStart = document.getElementById('gameStart')
+const btnReset = document.getElementById('gameReset')
+const btnMusic = document.getElementById('btnMusic')
+const btnSpells = document.getElementsByClassName('spellsBtn') 
+const hpMusic = document.getElementById('hpAudio')
+const playerCurrentHealth = document.getElementById('playerCurrentHealth')
+const houseCurrentHealth = document.getElementById('houseCurrentHealth')
+const playerMaxHealth = document.getElementById('playerMaxHealth')
+const playerStrength = document.getElementById('playerStrength')
+const houseMaxHealth = document.getElementById('houseMaxHealth')
+const houseStrength = document.getElementById('houseStrength')
+
+let duelStart = document.getElementById('duelStartId')
+let musicActive = false
+
+btnStart.addEventListener('click', startGame)
+btnMusic.addEventListener('click', changeAudio)
+btnReset.addEventListener('click', resetGame)
+
+//funções com botão:
+// function enableButtons() {
+
+//    btnLight.removeAttribute('disabled')
+//    btnSnake.removeAttribute('disabled')
+//    btnMind.removeAttribute('disabled')
+//    btnTricksy.removeAttribute('disabled')
+   
+// }
+
+//funções com botão 2:
+ function disableSpellsButtons() {
+    btnLight.classList.add('displayNone')
+    btnSnake.classList.add('displayNone')
+    btnMind.classList.add('displayNone')
+    btnTricksy.classList.add('displayNone')
+ }
+
+// //função com botão 3:
+// for (let button of spellsBtn){
+//    button.onclick = playGame
+// }
+
+
+
+function changeAudio(){
+   if (musicActive){
+      hpMusic.pause()
+      musicActive = false
+      btnMusic.innerHTML = 'Music ON'
+  } else {
+   hpMusic.play()
+   musicActive = true
+   btnMusic.innerHTML = 'Music OFF'
+  }
+}
+
+
+//funções com áudio:
+// function playAudio() {
+//    if (hpMusic.classList.contains('hpAudioActive')) {
+//       hpMusic.innerText = 'Music OFF'
+//       hpMusic.pause()
+//       hpMusic.classList.remove('hpAudioActive')
+//    }  else {
+
+//       hpMusic.play()
+//       hpMusic.volume = 0.05
+//       hpMusic.classList.add('hpAudioActive')
+//        hpMusic.innerText = 'Music ON'
+//    }
+// }
+
+//função auxiliar: iniciar o jogo:
 
 //1. criar os players e seus atributos (player x casas (console))
 class Wizard {
@@ -38,6 +117,39 @@ let rounds = 0
 //    console.log(currentHouse)
 //}
 
+function startGame(opponentHouse) {
+
+   duelStart.innerHTML = 'Choose your spell ... '
+   btnLight.classList.remove('displayNone')
+   btnSnake.classList.remove('displayNone')
+   btnMind.classList.remove('displayNone')
+   btnTricksy.classList.remove('displayNone')
+   btnStart.classList.add('displayNone')
+   
+   playerCurrentHealth.innerHTML = player.health
+   houseCurrentHealth.innerHTML = opponentHouse.health
+   playerMaxHealth.innerHTML = player.health
+   playerStrength = player.strength
+   houseMaxHealth = opponentHouse.health
+   houseStrength = opponentHouse.health
+   
+   
+   changeAudio()
+   
+   playGame()
+   
+   }
+
+function resetGame(){
+   duelStart.innerHTML = 'Press PLAY'
+   disableSpellsButtons()
+   btnStart.classList.remove('displayNone')
+   let musicActive = true
+   changeAudio()
+}
+
+   
+
 //jogador ataca 
 function playerAttack(playerSpell, opponentHouse){
    
@@ -47,32 +159,32 @@ function playerAttack(playerSpell, opponentHouse){
       
    }
   else if (playerSpell ===  'snake' && opponentHouse.name === 'Slytherin') {
-   slytherin.health -= player.strength /2 //('sonserina forte')
-   
+      slytherin.health -= player.strength /2 //('sonserina forte')
+      
    }
   else if (playerSpell ===  'light' && opponentHouse.name === 'Hufflepuf') {
-   hufflepuf.health -= player.strength /2 //('lufa lufa forte')
-   
+      hufflepuf.health -= player.strength /2 //('lufa lufa forte')
+      
   }
   else if (playerSpell ===  'mind' && opponentHouse.name === 'Hufflepuf') {
-   hufflepuf.health -= player.strength *2 //('lufa lufa fraca')
-   
+      hufflepuf.health -= player.strength *2 //('lufa lufa fraca')
+      
   }
   else if (playerSpell ===  'snake' && opponentHouse.name === 'Gryffindor') {
-   gryffindor.health -= player.strength *2 //('grifinória fraca')
-   
+      gryffindor.health -= player.strength *2 //('grifinória fraca')
+      
   }
   else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Gryffindor') {
-   gryffindor.health -= player.strength /2 //('grifinória forte')
-   
+      gryffindor.health -= player.strength /2 //('grifinória forte')
+      
   }
   else if (playerSpell ===  'mind' && opponentHouse.name === 'Ravenclaw') {
-   ravenclaw.health -= player.strength /2 //('corvinal forte')
-   
+      ravenclaw.health -= player.strength /2 //('corvinal forte')
+      
   }
   else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Ravenclaw') {
-   ravenclaw.health -= player.strength /2 //('corvinal fraca')
-   
+      ravenclaw.health -= player.strength /2 //('corvinal fraca')
+      
   }
   else 
   opponentHouse.health -= player.strength
@@ -91,9 +203,13 @@ function playGame(){
       console.log(opponentHouse.name)
 
       do {
-         const spell = prompt("Type your spell: ");
+         // const spell = prompt("Type your spell: ");
+         const spell = "snake"
          playerAttack(spell, opponentHouse)
          opponentAttack(opponentHouse)
+         playerCurrentHealth.innerHTML = player.health
+         houseCurrentHealth.innerHTML = opponentHouse.health
+
       } while (!isGameOver(opponentHouse))
    
    }
@@ -104,6 +220,11 @@ function playGame(){
 //restaurar a vida do jogador
 function restorePlayerHealth() {
    player.health = 50
+   //playerHealth.innerHTML = player.health
+}
+
+function restoreOpponentHouseHealth(opponentHouse) {
+   opponentHouse.health = 50
    //playerHealth.innerHTML = player.health
 }
 
@@ -125,9 +246,10 @@ function isGameOver(opponentHouse) {
       gameWinner = 'cpu'
       console.log(player.health)
       console.log('cpu ganhou')
+      console.log(opponentHouse)
    }
 
-   else if(opponentHouse.health <= 0) {
+   else if(opponentHouse.health <= 0) { //trocar visão para última casa sem vida.. incluir roundOver 
       restorePlayerHealth()
       gameOver = true
       console.log(opponentHouse.health)
@@ -138,7 +260,7 @@ function isGameOver(opponentHouse) {
    return gameOver;
 }
 
-playGame()
+// playGame()
 
 
 
