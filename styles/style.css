@@ -47,17 +47,15 @@ body {
 }
 
 .houseInfo {
-    display: flex;
-    align-items: flex-start;
-    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: wrap;
+    border: 20px solid white;
 }
 
 .houseInfo img {
-    margin: 5px;
-    margin-left: 10px;
-    min-width: 100px;
-    width: 160px;
-    /* border: 3px solid #EEEDDE; */
+    max-width:55%;
+    height:auto;
 
 }
 
@@ -72,7 +70,7 @@ body {
 
 .houseInfo h1 {
     width: 200px;
-    font-size: 2.5vmax;
+    font-size: 1.5vmax;
 }
 
 
@@ -85,56 +83,39 @@ body {
     height: 850px;
     margin-top: 3%;
     margin-left: 2%;
-    /* display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-flow: column; */
 }
 
 .playerBox ul {
-    /* width: 350px; */
-    display:flex;
-    justify-content: flex-start;
     margin-top: 20px;
     list-style: none;
 }
 
 .playerInfo {
-    
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    flex-flow: wrap;
+    border: 20px solid white;
 }
 
 .playerInfo img {
 
-    max-width:300px;
-    max-height:250px;
-    width: auto;
-    height: auto;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    /* margin: 10px; */
-   
-    /* margin: 16px;
-    min-width: 100px;
-    width: 160px; */
-    /*   */
+    max-width:110%;
+    height:auto;
+    
 }
 
 .playerInfo li {
     font-size: 1vmax;
-    
-    
-    /* display: inline-block;
-    list-style: none; */
-    /* padding: 5px;
-    margin: 10px; */
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+   
 }
 
 .playerInfo h1 {
     
-    font-size: 2.5vmax;
+    font-size: 1.5vmax;
+    
 }
 
 .playerInfo h1:hover {
@@ -142,16 +123,10 @@ body {
     color: #b8cff7;
 }
 
-/* .scoreboardContainer {
-    font-size: 1vmax;
-    position: absolute;
-    top: 100px;
-    margin-top: -200;
-    margin-left: 2%;
-} */
-     .duelStart {
+.duelCommentary {
     font-size: 1vmax;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     /* border: 4px solid #EEEDDE; */
@@ -160,15 +135,22 @@ body {
     margin-top: 100px;
     width: 95.5%;
     height: 110px;
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 42.5%;
-    height: 100px;
-    /* margin-left: 55%;
-    margin-top: -109px; */
 
 } 
+
+/* .duelCommentary > p {
+font-size: 0.8vmax;
+} */
+
+/* .duelOrientations{
+    font-size: 10px;
+    color: red;
+} */
+
+ /* #duelOrientarions{
+    font-size: 0.5vmax;
+    
+} */
 
      /* .duelStart h2 {
     margin: 20px;
@@ -196,6 +178,9 @@ body {
     height: 30%;
     text-decoration: none;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .spellsBtn:hover{
@@ -256,10 +241,10 @@ body {
     
 }
 
-.footer img {
+/* .footer img {
     width: 40px;
     height: 40px;
-}
+} */
 
 .footer button {
     font-size: 16px;
@@ -268,6 +253,7 @@ body {
     background-color: transparent;
     color: #EEEDDE;
     border: #6e5ec4 dotted 2px;
+    margin-bottom: 20px;
     width:90px;
     height: 50px;
     
@@ -315,11 +301,7 @@ body {
         margin: 2px;
     }
 
-    /* .scoreboardContainer {
-        top: 195px;
-    }  */
-
-     .duelStart {
+     .duelCommentary {
         width: 92%;
         margin-left: 3%;
         margin-top: 10px;

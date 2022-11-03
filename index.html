@@ -9,9 +9,7 @@
     <link rel="shortcut icon" href="./images/duel-icon.JPG" type="image/x-icon">
     <title>Wizard Duel</title>
     <link rel="stylesheet" href="./styles/style.css">
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet"> -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
@@ -25,9 +23,9 @@
             <div class="playerBox">
                 <div class="playerInfo">
                     <img src="./images/player-img.png">
-                    <label for="playerName">Name: </label>
-                    <!-- <input id="playerName" type="text" name="name" /> -->
-                    <h1 id="playerName">TESTE</h1>
+                    <!-- <label for="playerName">Name: </label>
+                    <input id="playerName" type="text" name="name" /> -->
+                    <h1 id="playerName"> </h1>
                     <ul>
                         <li>
                             <h2>HP <span id="playerCurrentHealth"></span> | <span id="playerMaxHealth"></span></h2>
@@ -43,29 +41,38 @@
 
             <div class="houseBox">
                 <div class="houseInfo">
-                    <img id="houseImg">
-                    <h1 id="houseName"></h1>
+                    <img id="houseImg" src="./images/houses.png">
+                    <h1 id="houseName"> </h1>
                     <ul>
                         <li>
-                            <h2>Health <span id="houseCurrentHealth"></span> | <span id="houseMaxHealth"></span></h2>
+                            <h2>HP <span id="houseCurrentHealth"> </span> | <span id="houseMaxHealth"></span></h2>
                         </li>
                         <li>
-                            <h2>Strength <span id="houseStrength"></span></h2>
+                            <h2>STR <span id="houseStrength"> </span></h2>
                         </li>
-                    
+                        <!-- <li>Gryffindor is strong against tricksy and weak against snake spells</li>
+                        <li>Slytherin is strong against snake spells and weak against light spells</li>
+                        <li>Ravenclaw is strong against mind spells and weak against tricksy spells</li>
+                        <li>Hufflepuf is strong against light spells and weak against mind spells</li> -->
                     </ul>
                 </div>
             </div>
             
-            <div class="duelStart">
-                <h2 id="duelStartId">Press PLAY</h2>
+            <div class="duelCommentary">
+                <h2 id="duelStartId">Welcome to the Wizard Tournament!</h2>
+                <!-- <p>To win the Wizard Tournament, you should use the right spell.</p>
+                <p>The Gryffindor house is strong against tricksy's spells and is weak against snake's spells</p>
+                <p>The Slytherin house is strong against snake's spells and is weak against light's spells</p>
+                <p>The Ravenclaw house is strong against mind's spells and is weak against tricksy's spells</p>
+                <p>The Hufflepuf house is strong against light's spells and is weak against mind's spells</p> -->
+                <!-- <span id = "duelOrientarions"> To win this tournament, you need to defeat the four Hogwart's house. You have to choose the rigth spell against the opponent House.</span> -->
             </div>  
 
             <div class="playerSpells">
-                <button id= "btnLight" class="spellsBtn displayNone">Expecto Patronum</button>
-                <button id="btnSnake" class="spellsBtn displayNone">SerpenSortia</button>
-                <button id= "btnMind" class="spellsBtn displayNone">Confundus</button>
-                <button id= "btnTricksy" class="spellsBtn displayNone">Riddikulus</button>
+                <button id= "light" class="spellsBtn displayNone">Expecto Patronum </button>
+                <button id="snake" class="spellsBtn displayNone">SerpenSortia</button>
+                <button id= "mind" class="spellsBtn displayNone">Confundus</button>
+                <button id= "tricksy" class="spellsBtn displayNone">Riddikulus</button>
                 <button id= "gameStart" class="btnPlay">PLAY</button>
                 <button id= "gameReset" class="btnReset">RESET</button>
             </div>
@@ -86,8 +93,8 @@
     <!-- <audio id="winAudio" src="./sounds/Success3.wav"></audio> -->
     <!-- <audio id="playerAttackAudio" src="./sounds/leafShuriken.wav"></audio>
     <audio id="enemyAttackAudio" src="./sounds/fireShuriken.wav"></audio> -->
-    <audio id="gameOverAudio" src="./audio/harry-potter-fail.mp3"></audio>
-    <!-- <audio id="scoreAudio" src="./sounds/coin.wav"></audio> -->
+    <audio id="gameOverAudio" src="./audio/hp-fail.mp3"></audio>
+    <audio id="winAudio" src="./audio/hp-win.mp3"></audio> -->
     <audio id="hpAudio" class="hpAudioActive" loop="true" src="./audio/harry-potter-theme.mp3" preload="auto" type="audio/mpeg"></audio>
     <script src="./scripts/game.js"></script>
     <!-- <script src=“./scripts/index.js”></script> -->

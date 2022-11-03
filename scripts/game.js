@@ -1,40 +1,69 @@
-// const prompt = require("prompt-sync")();
+//1. criar os players e seus atributos (player x casas (console))
+class Wizard {
+   constructor(name, strength) {
+      this.name = name
+      this.health = 50
+      this.strength = strength //8
+   }
+}
 
-//selecionar os botões:
-const btnLight = document.getElementById('btnLight')
-const btnSnake = document.getElementById('btnSnake')
-const btnMind = document.getElementById('btnMind')
-const btnTricksy = document.getElementById('btnTricksy')
+let playerName = prompt('Qual é o seu nome?');
+let player = new Wizard (playerName, 8)
+let gryffindor = new Wizard ('Gryffindor', 10)
+let slytherin = new Wizard ('Slytherin', 12)
+let ravenclaw = new Wizard ('Ravenclaw', 8)
+let hufflepuf = new Wizard ('Hufflepuf', 8)
+
+let houses = [gryffindor, slytherin, ravenclaw, hufflepuf]
+let currentHouse = 0
+let opponentHouse = houses[currentHouse]
+let opponentHouseMaxHealth = opponentHouse.health
+let opponentHouseCurrentHealth = opponentHouse.health
+let opponentHouseStrength = opponentHouse.strength
+let houseName = opponentHouse.name
+let playerSpell = ''
+let gameWinner = 'player'
+let gameOver = false
+let score = 0
+
+
+//selecionar os botões/elementos da página:
+const btnLight = document.querySelector('#light')
+const btnSnake = document.querySelector('#snake')
+const btnMind = document.querySelector('#mind')
+const btnTricksy = document.querySelector('#tricksy')
 const btnStart = document.getElementById('gameStart')
 const btnReset = document.getElementById('gameReset')
 const btnMusic = document.getElementById('btnMusic')
-const btnSpells = document.getElementsByClassName('spellsBtn') 
+const playerNameid = document.getElementById('playerName')
+const houseNameid = document.getElementById('houseName')
+// const btnSpells = document.getElementsByClassName('spellsBtn') 
 const hpMusic = document.getElementById('hpAudio')
+const gameOverAudio = document.getElementById('gameOverAudio')
+const winAudio = document.getElementById('winAudio')
 const playerCurrentHealth = document.getElementById('playerCurrentHealth')
 const houseCurrentHealth = document.getElementById('houseCurrentHealth')
 const playerMaxHealth = document.getElementById('playerMaxHealth')
 const playerStrength = document.getElementById('playerStrength')
 const houseMaxHealth = document.getElementById('houseMaxHealth')
 const houseStrength = document.getElementById('houseStrength')
+const houseInfo = document.getElementsByClassName('houseInfo')
+const duelCommentaryClass = document.getElementsByClassName('duelCommentary')
+// const duelCommentary = document.getElementsByClassName('duelCommentary')
 
-let duelStart = document.getElementById('duelStartId')
+let duelCommentary = document.getElementById('duelStartId')
+// duelCommentary.appendChild(p)
 let musicActive = false
+let gameOverAudioActive = false
+
+playerNameid.innerHTML = playerName //aparecer o nome e atributos do jogador
+
 
 btnStart.addEventListener('click', startGame)
 btnMusic.addEventListener('click', changeAudio)
 btnReset.addEventListener('click', resetGame)
 
-//funções com botão:
-// function enableButtons() {
-
-//    btnLight.removeAttribute('disabled')
-//    btnSnake.removeAttribute('disabled')
-//    btnMind.removeAttribute('disabled')
-//    btnTricksy.removeAttribute('disabled')
-   
-// }
-
-//funções com botão 2:
+//função desabilitar botões de feitiço
  function disableSpellsButtons() {
     btnLight.classList.add('displayNone')
     btnSnake.classList.add('displayNone')
@@ -42,13 +71,15 @@ btnReset.addEventListener('click', resetGame)
     btnTricksy.classList.add('displayNone')
  }
 
-// //função com botão 3:
-// for (let button of spellsBtn){
-//    button.onclick = playGame
-// }
+//seleciona os botões de escolha
+const btnSpells = document.getElementsByClassName('spellsBtn') //escolhendo os 4 botões d euma vez
 
+//selecionando o feitiço pelo clique
+for (let button of btnSpells){
+   button.addEventListener('click', playerAttack)
+}
 
-
+//função par aligar e desligar a música
 function changeAudio(){
    if (musicActive){
       hpMusic.pause()
@@ -61,65 +92,11 @@ function changeAudio(){
   }
 }
 
-
-//funções com áudio:
-// function playAudio() {
-//    if (hpMusic.classList.contains('hpAudioActive')) {
-//       hpMusic.innerText = 'Music OFF'
-//       hpMusic.pause()
-//       hpMusic.classList.remove('hpAudioActive')
-//    }  else {
-
-//       hpMusic.play()
-//       hpMusic.volume = 0.05
-//       hpMusic.classList.add('hpAudioActive')
-//        hpMusic.innerText = 'Music ON'
-//    }
-// }
-
-//função auxiliar: iniciar o jogo:
-
-//1. criar os players e seus atributos (player x casas (console))
-class Wizard {
-   constructor(name, strength) {
-      this.name = name
-      this.health = 50
-      this.strength = strength //8
-   }
-}
-
-let player = new Wizard ('playerName', 8)
-let gryffindor = new Wizard ('Gryffindor', 10)
-let slytherin = new Wizard ('Slytherin', 12)
-let ravenclaw = new Wizard ('Ravenclaw', 8)
-let hufflepuf = new Wizard ('Hufflepuf', 8)
-
-let houses = [gryffindor, slytherin, ravenclaw, hufflepuf]
-
-//let indexHouse = ''
-//let chosenHouses = []
-//let choices = ['light', 'snake', 'mind']
-//let gameOver = false
-let playerSpell = ''
-//let currentHouse = ''
-let  gameWinner = 'player'
-let playerScore = ''
-let houseScore = ''
-let rounds = 0
-//let duelStart = document.getElementsByClassName('duelStart')
-
-
-
-//trazer o adversário
-// function chooseHouse(){
-//    let indexHouse = Math.floor(Math.random()*houses.length)
-//    currentHouse = houses[indexHouse]
-//    console.log(currentHouse)
-//}
-
+//função de iniciar o jogo
 function startGame(opponentHouse) {
 
-   duelStart.innerHTML = 'Choose your spell ... '
+   duelCommentary.innerHTML = 'Choose your spell ... '
+
    btnLight.classList.remove('displayNone')
    btnSnake.classList.remove('displayNone')
    btnMind.classList.remove('displayNone')
@@ -129,303 +106,228 @@ function startGame(opponentHouse) {
    playerCurrentHealth.innerHTML = player.health
    houseCurrentHealth.innerHTML = opponentHouse.health
    playerMaxHealth.innerHTML = player.health
-   playerStrength = player.strength
-   houseMaxHealth = opponentHouse.health
-   houseStrength = opponentHouse.health
-   
-   
-   changeAudio()
-   
-   playGame()
-   
-   }
+   playerStrength.innerHTML = player.strength
+   houseMaxHealth.innerHTML = opponentHouseMaxHealth
+   houseStrength.innerHTML = opponentHouseStrength
+   houseNameid.innerHTML = houseName
+   houseCurrentHealth.innerHTML = opponentHouseMaxHealth
 
-function resetGame(){
-   duelStart.innerHTML = 'Press PLAY'
-   disableSpellsButtons()
-   btnStart.classList.remove('displayNone')
-   let musicActive = true
-   changeAudio()
+   changeAudio()   
 }
 
-   
+//função para reiniciar o jogo
+function resetGame(){
+   disableSpellsButtons()
+   restorePlayerHealth() 
+   score = 0
+   currentHouse = 0
+   gameOver = false
+   gameWinner = 'player'
+   // restoreOpponentHouseHealth(opponentHouse)
+   opponentHouse = houses[currentHouse]
+   gryffindor.health = 50
+   slytherin.health = 50
+   ravenclaw.health = 50
+   hufflepuf.health = 50
+   houseNameid.innerHTML = ''
+   houseStrength.innerHTML = ''
+   houseMaxHealth.innerHTML = ''
+   houseCurrentHealth.innerHTML = ''
+   playerCurrentHealth.innerHTML = ''
+   playerMaxHealth.innerHTML = ''
+   playerStrength.innerHTML = ''
+   duelCommentary.innerHTML = 'Welcome to the Wizard Tournament'
+   btnStart.classList.remove('displayNone')
+   musicActive = true
+   changeAudio()
+   gameOverAudio.pause()
+   winAudio.pause()
+}
 
-//jogador ataca 
-function playerAttack(playerSpell, opponentHouse){
-   
+
+//função para iniciar as partidas
+function playerAttack(e){
+if(!gameOver) {
+   console.log(e.currentTarget)
+   const button = e.currentTarget //seleciona o botão
+   const playerSpell = button.getAttribute('id')
+
    
    if (playerSpell ===  'light' && opponentHouse.name === 'Slytherin') {
       slytherin.health -= player.strength *2 //('sonserina fraca')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Wow! Your spell is very strong against ${opponentHouse.name}, dealing ${player.strength*2} damage`
    }
   else if (playerSpell ===  'snake' && opponentHouse.name === 'Slytherin') {
       slytherin.health -= player.strength /2 //('sonserina forte')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Oh no! Your spell is not very effective against ${opponentHouse.name}, dealing only ${player.strength/2} damage. Try to choose other spell`
    }
   else if (playerSpell ===  'light' && opponentHouse.name === 'Hufflepuf') {
       hufflepuf.health -= player.strength /2 //('lufa lufa forte')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Oh no! Your spell is not very effective against ${opponentHouse.name}, dealing only ${player.strength/2} damage. Try to choose other spell`
   }
   else if (playerSpell ===  'mind' && opponentHouse.name === 'Hufflepuf') {
       hufflepuf.health -= player.strength *2 //('lufa lufa fraca')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Wow! Your spell is very strong against ${opponentHouse.name}, dealing ${player.strength*2} damage`
   }
   else if (playerSpell ===  'snake' && opponentHouse.name === 'Gryffindor') {
       gryffindor.health -= player.strength *2 //('grifinória fraca')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Wow! Your spell is very strong against ${opponentHouse.name}, dealing ${player.strength*2} damage`
   }
   else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Gryffindor') {
       gryffindor.health -= player.strength /2 //('grifinória forte')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Oh no! Your spell is not very effective against ${opponentHouse.name}, dealing only ${player.strength/2} damage. Try to choose other spell`
   }
   else if (playerSpell ===  'mind' && opponentHouse.name === 'Ravenclaw') {
       ravenclaw.health -= player.strength /2 //('corvinal forte')
-      
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Oh no! Your spell is not very effective against ${opponentHouse.name}, dealing only ${player.strength/2} damage. Try to choose other spell`
   }
   else if (playerSpell ===  'tricksy' && opponentHouse.name === 'Ravenclaw') {
-      ravenclaw.health -= player.strength /2 //('corvinal fraca')
-      
+      ravenclaw.health -= player.strength *2 //('corvinal fraca')
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      duelCommentary.innerHTML = `Wow! Your spell is very strong against ${opponentHouse.name}, dealing ${player.strength*2} damage`
   }
-  else 
+  else {
   opponentHouse.health -= player.strength
+  houseCurrentHealth.innerHTML = opponentHouse.health
+  duelCommentary.innerHTML = `Your spell works fine against ${opponentHouse.name}, dealing ${player.strength} damage, but if you choose the right spell, you can win the duel faster`
+  }
+   
+  setTimeout(() => {
+   isGameOver(opponentHouse) }, 2000) 
+
+   // isGameOver(opponentHouse) 
+   //  setTimeout(() => {
+   //  opponentAttack()}, 5000) 
+   // //  isGameOver(opponentHouse) 
+   
+   setTimeout(() => {
+      duelCommentary.innerHTML = "Wait the opponent house"}, 4000) 
+
+      setTimeout(() => {
+         opponentAttack()}, 5500) 
+
+   setTimeout(() => {
+   isGameOver(opponentHouse) }, 4000) 
 }
 
-function opponentAttack(opponentHouse){
+}
+
+//função cpu ataca
+function opponentAttack(){
+//   isGameOver(opponentHouse)
+   console.log('oponente ataca')
    player.health -= opponentHouse.strength
+   // playerCurrentHealth.innerHTML = player.health
+
+   //mensagem de dano  
+   setTimeout(() => {
+      duelCommentary.innerHTML = `${opponentHouse.name} has attacked you, dealing ${opponentHouse.strength} damage`}, 1000) 
+   //atualizar o player hesalth   
+      setTimeout(() => {
+         playerCurrentHealth.innerHTML = player.health}, 1000)
+   //validar se após o ataque houve gamOver   
+    setTimeout(() => {
+      isGameOver(opponentHouse)}, 3000)
+  
 }
 
-function playGame(){
-   
-   for (let i=0; i < houses.length && gameWinner == 'player'; i++){
-
-      let currentHouse = i
-      let opponentHouse = houses[currentHouse]
-      console.log(opponentHouse.name)
-
-      do {
-         // const spell = prompt("Type your spell: ");
-         const spell = "snake"
-         playerAttack(spell, opponentHouse)
-         opponentAttack(opponentHouse)
-         playerCurrentHealth.innerHTML = player.health
-         houseCurrentHealth.innerHTML = opponentHouse.health
-
-      } while (!isGameOver(opponentHouse))
-   
-   }
-   
-   
-}
 
 //restaurar a vida do jogador
 function restorePlayerHealth() {
    player.health = 50
-   //playerHealth.innerHTML = player.health
+   playerCurrentHealth.innerHTML = player.health
+      
 }
 
+//restaurar a vida da cpu
 function restoreOpponentHouseHealth(opponentHouse) {
    opponentHouse.health = 50
-   //playerHealth.innerHTML = player.health
+   houseCurrentHealth.innerHTML = opponentHouse.health
+
 }
 
+
 //alterar adversário (VALIDAR)
-// function changeHouse(){
-//    if(indexHouse = houses.length) checkGameOver()
-//   else {
-//    indexHouse = [indexHouse+1]
-//   currentHouse = houses[indexHouse]
-//   restorePlayerHealth()
-//   }
-// }
+ function changeHouse(){
+
+   //se score chegar a 4, voltar para o GameOver
+   if(score == 4){
+      isGameOver(opponentHouse)
+  } 
+  
+      else {
+      setTimeout(() => {
+      duelCommentary.innerHTML = "Time to defeat another house"}, 1000) 
+   
+      currentHouse++
+      opponentHouse = houses[currentHouse]
+      houseNameid.innerHTML = opponentHouse.name
+      houseCurrentHealth.innerHTML = opponentHouse.health
+      houseStrength.innerHTML = opponentHouse.strength
+      console.log(opponentHouse)
+      }
+}
+ 
 
 //validar gameover
 function isGameOver(opponentHouse) {
-   let gameOver = false;
+   // let gameOver = false;
+  
    if (player.health <=0) {
       gameOver = true
       gameWinner = 'cpu'
+
       console.log(player.health)
       console.log('cpu ganhou')
       console.log(opponentHouse)
+
+      duelCommentary.innerHTML = `Don’t put your wand there, Kid! ${opponentHouse.name} has defeted you` 
+
+      hpMusic.pause()
+      gameOverAudio.play()
+
+      setTimeout(() => {
+         resetGame(opponentHouse)}, 10000) 
+     
    }
 
-   else if(opponentHouse.health <= 0) { //trocar visão para última casa sem vida.. incluir roundOver 
-      restorePlayerHealth()
+   else if (opponentHouse.health <= 0 && score == 4) {
       gameOver = true
+      
       console.log(opponentHouse.health)
       console.log(opponentHouse)
       console.log('player ganhou')
+      console.log('condição de gameWinner')
+
+      duelCommentary.innerHTML = `Congratulations! You've won the Wizard Tournament, defeating all Hogwart's houses`
+
+      hpMusic.pause()
+      winAudio.volume = 0.5
+      winAudio.play()
+
+       setTimeout(() => {
+          resetGame(opponentHouse)}, 10000) 
+   } 
+
+   else if (opponentHouse.health <= 0) { 
+      score++
+      console.log(score)
+      console.log('condição de trocar de casa')
+      restorePlayerHealth()
+      changeHouse()
    }
 
-   return gameOver;
-}
+return gameOver
 
-// playGame()
-
-
-
-
-
-
-// function play (playerSpell){
-//    chooseHouse()
-// //if (!gameOver) {
-// if(playerSpell === 'light' && currentHouse.name === 'Slytherin'){
-//    slytherin.health -= (player.strength*2)
-//    console.log(slytherin.health)
-// } else {
-//    console.log('tente de novo')
-// }
-// }
-
-// play('light')
-
-
-
-  // houseAttack()
-//}
-   //function getCpuChoice() {
-//    const randomNumber = Math.floor(Math.random() * this.choices.length)
-
-//    return this.choices[randomNumber]
-// }
-
-
-// function play(playerSpell){
-//    if(!this.gameOver) {
-//        this.playerSpell = playerSpell
-//        this.cpuChoice = this.getCpuChoice()
-//        this.checkRoundWinner()
-//        this.roundsPlayed++
-//    }
    
-//    return this
-
-// }
-
-
-
-
-
-
-
-// let spells = [
-//    {name: 'Expecto Patronum',
-//    type: 'light'},
-
-//    {name: 'Lumus',
-//    type: 'light'},
-
-//    {name: 'Serpensortia',
-//    type: 'snake'}
-// ]
-
-
-//ação: iniciar jogo:
-//1. seleção aleatória da casa adversária pela CPU
-
-
-//2. Player ataca (escolhe feitiço desejado)
-//function chooseSpell(){
-   //let playerSpell = 'Expecto Patronum'//incluir botão com as opções de clique
-   //return playerSpell
-//}
-
-
-
-
-//2.1. se o feitiço for forte contra casa = dano = ataquePlayer *2
-
-// function start(playerSpell){
-//    chooseHouse()
-//    chooseSpell()
-//    if (playerSpell === spells.ligth){
-//       console.log(deu certo)
-//    }
-// }
-//2.2. se o feitiço for fraco contra a casa = dano = atquePlayer/2 
-//2.3. feitiço neutro = dano = poder de ataquePlayer
-
-// class Gryffindor extends Wizard {
-// constructor(name) {
-// super
-// this.name = name
-// this.health = 50 //como simplificar o health igual? posso usar o super?
-// this.strength = 10
-// }
-// }
-
-// class Slytherin extends Wizard {
-// constructor(name) {
-// this.name = name
-// this.health = 50 //como simplificar o health igual? posso usar o super?
-// this.strength = 12
-// }
-// }
-
-
-// class Ravenclaw extends Wizard {
-// constructor(name) {
-// this.name = name
-// this.health = 50 //como simplificar o health igual? posso usar o super?
-// this.strength = 8
-// }
-// }
-
-
-// class Hufflepuff extends Wizard {
-// constructor(name) {
-// this.name = name
-// this.health = 50 //como simplificar o health igual? posso usar o super?
-// this.strength = 8
-// }
-// }
-// }
-
-
-
-
-
-
-//play(){
-//}
-
-
-
-
-
-
-// }
-    
-//1.1. definir forças e fraquezas de cada casa
-//3. definir feitiços e seus atributos
-
-
-//3. CPU ataca
-//3.1. adversário (CPU) sempre dará o poder de dano = poder de ataque
-// 4. Reiniciar rodada (até HP de player ou CPU chegar a 0 - todas as casas)
-//4.1. Se HP do player = 0; mensagem de derrota
-//4.2 Se HP da CPU = 0; mudar a casa selecionada (excluir casas que já foram)
-//4.3 Se CPU (todas as casas) = 0; mensagem de vitória
-//4.3 Não há empate. O jogo termina quando um for derrotado
-//let playerName = document.getElementById('playerName')
-//class wizardPlayer {
-   // constructor ()
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
