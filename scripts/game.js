@@ -48,7 +48,11 @@ const playerStrength = document.getElementById('playerStrength')
 const houseMaxHealth = document.getElementById('houseMaxHealth')
 const houseStrength = document.getElementById('houseStrength')
 const houseInfo = document.getElementsByClassName('houseInfo')
-const duelCommentaryClass = document.getElementsByClassName('duelCommentary')
+// const duelCommentaryClass = document.getElementsByClassName('duelCommentary')
+// const duelOrientations1 = document.getElementsById('duelOrientations1')
+// const duelOrientations2 = document.getElementsById('duelOrientations1')
+// const duelOrientations3 = document.getElementsById('duelOrientations1')
+// const duelOrientations4 = document.getElementsById('duelOrientations1')
 // const duelCommentary = document.getElementsByClassName('duelCommentary')
 
 let duelCommentary = document.getElementById('duelStartId')
@@ -199,22 +203,33 @@ if(!gameOver) {
   duelCommentary.innerHTML = `Your spell works fine against ${opponentHouse.name}, dealing ${player.strength} damage, but if you choose the right spell, you can win the duel faster`
   }
    
-  setTimeout(() => {
-   isGameOver(opponentHouse) }, 2000) 
+   // setTimeout(() => {
+   // isGameOver(opponentHouse) }, 2000) 
+
+if(!isGameOver(opponentHouse) && opponentHouse.health <= 0){
+      score++
+      console.log(score)
+      console.log('condição de trocar de casa')
+      restorePlayerHealth()
+      changeHouse()
+} else if (!isGameOver(opponentHouse)){
+   setTimeout(() => {
+      duelCommentary.innerHTML = "Wait the opponent house"}, 4000) 
+
+      setTimeout(() => {
+         opponentAttack()}, 4500) 
+}
+
 
    // isGameOver(opponentHouse) 
    //  setTimeout(() => {
    //  opponentAttack()}, 5000) 
    // //  isGameOver(opponentHouse) 
    
-   setTimeout(() => {
-      duelCommentary.innerHTML = "Wait the opponent house"}, 4000) 
+   
 
-      setTimeout(() => {
-         opponentAttack()}, 5500) 
-
-   setTimeout(() => {
-   isGameOver(opponentHouse) }, 4000) 
+   // setTimeout(() => {
+   // isGameOver(opponentHouse) }, 4000) 
 }
 
 }
@@ -233,8 +248,8 @@ function opponentAttack(){
       setTimeout(() => {
          playerCurrentHealth.innerHTML = player.health}, 1000)
    //validar se após o ataque houve gamOver   
-    setTimeout(() => {
-      isGameOver(opponentHouse)}, 3000)
+   //  setTimeout(() => {
+   //    isGameOver(opponentHouse)}, 3000)
   
 }
 
@@ -257,12 +272,13 @@ function restoreOpponentHouseHealth(opponentHouse) {
 //alterar adversário (VALIDAR)
  function changeHouse(){
 
+   if(currentHouse<3){ 
    //se score chegar a 4, voltar para o GameOver
-   if(score == 4){
-      isGameOver(opponentHouse)
-  } 
+//    if(score == 4){
+//       isGameOver(opponentHouse)
+//   } 
   
-      else {
+//       else {
       setTimeout(() => {
       duelCommentary.innerHTML = "Time to defeat another house"}, 1000) 
    
@@ -272,14 +288,14 @@ function restoreOpponentHouseHealth(opponentHouse) {
       houseCurrentHealth.innerHTML = opponentHouse.health
       houseStrength.innerHTML = opponentHouse.strength
       console.log(opponentHouse)
-      }
+      // }
 }
- 
+}
 
 //validar gameover
 function isGameOver(opponentHouse) {
    // let gameOver = false;
-  
+  console.log("na game over")
    if (player.health <=0) {
       gameOver = true
       gameWinner = 'cpu'
@@ -316,13 +332,8 @@ function isGameOver(opponentHouse) {
           resetGame(opponentHouse)}, 10000) 
    } 
 
-   else if (opponentHouse.health <= 0) { 
-      score++
-      console.log(score)
-      console.log('condição de trocar de casa')
-      restorePlayerHealth()
-      changeHouse()
-   }
+ 
+
 
 return gameOver
 
