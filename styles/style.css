@@ -73,7 +73,7 @@ body {
 .houseInfo h1 {
     font-size: 1.5vmax;
     align-self: center;
-    color: #b8cff7;
+    color: white;
     font-weight: 900;
 }
 
@@ -116,7 +116,7 @@ body {
     list-style: none;
     padding: 5px;
     margin: 10px;
-   
+       
 }
 
 .playerInfo h1 {
@@ -138,7 +138,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 4px solid #EEEDDE; */
     margin: 10px auto;
     padding-top: 15px;
     margin-top: 100px;
@@ -147,29 +146,10 @@ body {
 
 } 
 
-/* .duelCommentary > p {
-font-size: 0.8vmax;
-} */
-
-/* .duelOrientations{
-    font-size: 10px;
-    color: red;
-} */
-
- /* #duelOrientarions{
-    font-size: 0.5vmax;
-    
-} */
-
-     /* .duelStart h2 {
-    margin: 20px;
-}  */
-
 .playerSpells {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* border: 4px solid #EEEDDE; */
     margin: 10px auto;
     width: 95.5%;
     height: 160px;
@@ -205,7 +185,6 @@ font-size: 0.8vmax;
     color: #EEEDDE;
     width: 15%;
     height: 50%;
-    /* text-decoration : none; */
     border-radius: 12px;
     opacity: 2;
 
@@ -229,7 +208,6 @@ font-size: 0.8vmax;
     color: #EEEDDE;
     width: 15%;
     height: 50%;
-    /* text-decoration: none; */
     border-radius: 12px;
 }
 
@@ -249,11 +227,6 @@ font-size: 0.8vmax;
     
     
 }
-
-/* .footer img {
-    width: 40px;
-    height: 40px;
-} */
 
 .footer button {
     font-size: 16px;
@@ -299,7 +272,6 @@ font-size: 0.8vmax;
     .playerInfo {
         display: flex;
         flex-direction: row;
-        border: 2px solid red;
         align-items: center;
         justify-content: flex-start;
     }
@@ -318,6 +290,7 @@ font-size: 0.8vmax;
             
     }
 
+
     .houseBox{
         width: 88%;
         letter-spacing: 1px;
@@ -332,10 +305,9 @@ font-size: 0.8vmax;
         
         display: flex;
         flex-direction: row;
-        border: 2px solid red;
         align-items: center;
         justify-content: flex-start;
-        /* border: 20px solid white; */
+
     }
 
     .houseInfo img {
@@ -343,11 +315,13 @@ font-size: 0.8vmax;
     height:auto;
     margin-bottom: 15px;
     margin-top: 20px;
+    padding-left: 50px;
     }
 
     .houseInfo h1 {
     font-size: 2vmax;
     align-items: center;
+    
     }
 
      .duelCommentary {
