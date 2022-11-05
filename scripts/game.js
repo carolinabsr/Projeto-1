@@ -48,12 +48,7 @@ const playerStrength = document.getElementById('playerStrength')
 const houseMaxHealth = document.getElementById('houseMaxHealth')
 const houseStrength = document.getElementById('houseStrength')
 const houseInfo = document.getElementsByClassName('houseInfo')
-// const duelCommentaryClass = document.getElementsByClassName('duelCommentary')
-// const duelOrientations1 = document.getElementsById('duelOrientations1')
-// const duelOrientations2 = document.getElementsById('duelOrientations1')
-// const duelOrientations3 = document.getElementsById('duelOrientations1')
-// const duelOrientations4 = document.getElementsById('duelOrientations1')
-// const duelCommentary = document.getElementsByClassName('duelCommentary')
+
 
 
 let duelCommentary = document.getElementById('duelStartId')
@@ -84,7 +79,7 @@ for (let button of btnSpells){
    button.addEventListener('click', playerAttack)
 }
 
-//função par aligar e desligar a música
+//função para ligar e desligar a música
 function changeAudio(){
    if (musicActive){
       hpMusic.pause()
@@ -128,7 +123,6 @@ function resetGame(){
    currentHouse = 0
    gameOver = false
    gameWinner = 'player'
-   // restoreOpponentHouseHealth(opponentHouse)
    opponentHouse = houses[currentHouse]
    gryffindor.health = 50
    slytherin.health = 50
@@ -270,15 +264,15 @@ function restoreOpponentHouseHealth(opponentHouse) {
 }
 
 
-//alterar adversário (VALIDAR)
+//alterar adversário
  function changeHouse(){
 
-   if(currentHouse<3){ 
+     if(currentHouse<3){ 
    //se score chegar a 4, voltar para o GameOver
 //    if(score == 4){
 //       isGameOver(opponentHouse)
 //   } 
-  
+  console.log('condição de trocar casa.. dentro da validação')
 //       else {
       setTimeout(() => {
       duelCommentary.innerHTML = "Time to defeat another house"}, 1000) 
@@ -290,7 +284,7 @@ function restoreOpponentHouseHealth(opponentHouse) {
       houseStrength.innerHTML = opponentHouse.strength
       console.log(opponentHouse)
       // }
-}
+} else if(score ==4) isGameOver(opponentHouse)
 }
 
 //validar gameover
