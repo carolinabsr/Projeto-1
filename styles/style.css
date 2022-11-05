@@ -47,31 +47,34 @@ body {
 }
 
 .houseInfo {
-    align-content: center;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    flex-flow: wrap;
-    border: 20px solid white;
+    /* border: 20px solid white; */
 }
 
 .houseInfo img {
     max-width:55%;
     height:auto;
     align-self: center;
+    margin-bottom: 15px;
 
 }
 
 
 .houseInfo li {
     font-size: 1vmax;
-    display: inline-block;
+    align-self: center;
     list-style: none;
     padding: 5px;
     margin: 10px;
 }
 
 .houseInfo h1 {
-    width: 200px;
     font-size: 1.5vmax;
+    align-self: center;
+    color: #b8cff7;
+    font-weight: 900;
 }
 
 
@@ -95,28 +98,32 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border: 20px solid white;
+    /* border: 20px solid white; */
 }
 
 .playerInfo img {
 
-    max-width:110%;
+    max-width:120%;
     height:auto;
     align-self: center;
+    margin-bottom: 15px;
     
 }
 
 .playerInfo li {
     font-size: 1vmax;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+    align-self: center;
+    list-style: none;
+    padding: 5px;
+    margin: 10px;
    
 }
 
 .playerInfo h1 {
     
     font-size: 1.5vmax;
+    align-self: center;
+    color: white;
     
 }
 
@@ -284,11 +291,31 @@ font-size: 0.8vmax;
         letter-spacing: 1px;
         height: 150px;
         margin-left: 2.5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .playerInfo {
+        display: flex;
+        flex-direction: row;
+        border: 2px solid red;
+        align-items: center;
+        justify-content: flex-start;
     }
     
     .playerInfo img {
-        min-width: 70px;
-        margin: 2px;
+    max-width:30%;
+    height:auto;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    }
+
+    .playerInfo h1 {
+    
+    font-size: 2vmax;
+    align-items: center;
+            
     }
 
     .houseBox{
@@ -296,11 +323,31 @@ font-size: 0.8vmax;
         letter-spacing: 1px;
         height: 150px;
         margin-left: 2.5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
+    .houseInfo {
+        
+        display: flex;
+        flex-direction: row;
+        border: 2px solid red;
+        align-items: center;
+        justify-content: flex-start;
+        /* border: 20px solid white; */
+    }
+
     .houseInfo img {
-        min-width: 70px;
-        margin: 2px;
+    max-width:15%;
+    height:auto;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    }
+
+    .houseInfo h1 {
+    font-size: 2vmax;
+    align-items: center;
     }
 
      .duelCommentary {
@@ -311,16 +358,24 @@ font-size: 0.8vmax;
     } 
 
     .playerSpells {
-        width: 92%;
-        height: 80px;
+        width: 90%;
+        height: 90px;
+        font-size: 1vmax;
+    }
+
+    .spellsBtn {
+    font-size: 1vmax;
+    width: 25%;
+    height: 30%;
+    
     }
 
     .btnPlay {
-        width: 40%;
+        width: 20%;
     }
 
     .btnReset {
-        width: 40%;
+        width: 20%;
     }
 
     .footer {

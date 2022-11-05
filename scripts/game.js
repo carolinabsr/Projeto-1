@@ -55,6 +55,7 @@ const houseInfo = document.getElementsByClassName('houseInfo')
 // const duelOrientations4 = document.getElementsById('duelOrientations1')
 // const duelCommentary = document.getElementsByClassName('duelCommentary')
 
+
 let duelCommentary = document.getElementById('duelStartId')
 // duelCommentary.appendChild(p)
 let musicActive = false
@@ -307,6 +308,7 @@ function isGameOver(opponentHouse) {
       duelCommentary.innerHTML = `Don’t put your wand there, Kid! ${opponentHouse.name} has defeted you` 
 
       hpMusic.pause()
+      gameOverAudio.volume = 0.3
       gameOverAudio.play()
 
       setTimeout(() => {
@@ -325,7 +327,7 @@ function isGameOver(opponentHouse) {
       duelCommentary.innerHTML = `Congratulations! You've won the Wizard Tournament, defeating all Hogwart's houses`
 
       hpMusic.pause()
-      winAudio.volume = 0.5
+      winAudio.volume = .15
       winAudio.play()
 
        setTimeout(() => {
